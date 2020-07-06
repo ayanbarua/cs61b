@@ -53,34 +53,47 @@ public class LinkedListDeque<T>{
     public void printDeque() {
         if (isEmpty()) {
             System.out.println("null");
-            return;
         } else {
             TNode curr = sentinel;
             while(curr.next.item != null) {
                 System.out.print(curr.next.item + " ");
                 curr = curr.next;
             }
-            return;
         }
     }
-//
-//    public T removeFirst() {
-//
-//    }
-//
-//    public T removeLast() {
-//
-//    }
-//
-//    public T get(T item) {
-//
-//    }
 
-    public static void main(String[] args) {
-        LinkedListDeque L = new LinkedListDeque();
-        L.addFirst(2);
-        L.addFirst(1);
-        L.addLast(3);
-        L.printDeque();
+    public T removeFirst() {
+        if (isEmpty()) {
+            return null;
+        }
+        T first = sentinel.next.item;
+        sentinel.next = sentinel.next.next;
+        sentinel.next.prev = sentinel;
+        size--;
+        return first;
+    }
+
+    public T removeLast() {
+        if (isEmpty()) {
+            return null;
+        }
+        T last = sentinel.prev.item;
+        sentinel.prev = sentinel.prev.prev;
+        sentinel.prev.next = sentinel;
+        size--;
+        return last;
+    }
+
+    public T get(int index) {
+        if ((size == 0) || (index > size - 1)) {
+            return null;
+        }
+        TNode curr = sentinel.next;
+        int count = 0;
+        while (count != index) {
+            curr = curr.next;
+            count++;
+        }
+        return curr.item;
     }
 }
