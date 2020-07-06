@@ -21,20 +21,66 @@ public class LinkedListDeque<T>{
     }
 
     public void addFirst(T item) {
+        if (isEmpty()) {
+            sentinel.next = new TNode(item, sentinel, sentinel);
+            sentinel.prev = sentinel.next;
+        } else {
+            sentinel.next = new TNode(item, sentinel, sentinel.next);
+            sentinel.next.next.prev = sentinel.next;
+        }
         size++;
-        sentinel.next = new TNode(item, sentinel, sentinel);
-        sentinel.prev = sentinel.next;
     }
 
     public void addLast(T item) {
+        if (isEmpty()) {
+            sentinel.next = new TNode(item, sentinel, sentinel);
+            sentinel.prev = sentinel.next;
+        } else{
+            sentinel.prev = new TNode(item, sentinel.prev, sentinel);
+            sentinel.prev.prev.next = sentinel.prev;
+        }
         size++;
     }
 
     public boolean isEmpty() {
-        return size == 0;
+        return (size == 0);
     }
 
     public int size() {
         return size;
+    }
+
+    public void printDeque() {
+        if (isEmpty()) {
+            System.out.println("null");
+            return;
+        } else {
+            TNode curr = sentinel;
+            while(curr.next.item != null) {
+                System.out.print(curr.next.item + " ");
+                curr = curr.next;
+            }
+            return;
+        }
+    }
+//
+//    public T removeFirst() {
+//
+//    }
+//
+//    public T removeLast() {
+//
+//    }
+//
+//    public T get(T item) {
+//
+//    }
+
+    public static void main(String[] args) {
+        LinkedListDeque L = new LinkedListDeque();
+        L.addFirst(2);
+        L.addFirst(1);
+        L.addLast(3);
+        L.printDeque();
     }
 }
