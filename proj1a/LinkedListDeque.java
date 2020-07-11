@@ -1,8 +1,8 @@
-public class LinkedListDeque<T>{
+public class LinkedListDeque<T> {
     private class TNode {
-        public T item;
-        public TNode prev;
-        public TNode next;
+        private T item;
+        private TNode prev;
+        private TNode next;
 
         public TNode(T item, TNode prev, TNode next) {
             this.item = item;
@@ -10,8 +10,8 @@ public class LinkedListDeque<T>{
             this.next = next;
         }
     }
-    public int size;
-    public TNode sentinel;
+    private int size;
+    private TNode sentinel;
 
     public LinkedListDeque() {
         size = 0;
@@ -35,7 +35,7 @@ public class LinkedListDeque<T>{
         if (isEmpty()) {
             sentinel.next = new TNode(item, sentinel, sentinel);
             sentinel.prev = sentinel.next;
-        } else{
+        } else {
             sentinel.prev = new TNode(item, sentinel.prev, sentinel);
             sentinel.prev.prev.next = sentinel.prev;
         }
@@ -55,7 +55,7 @@ public class LinkedListDeque<T>{
             System.out.println("null");
         } else {
             TNode curr = sentinel;
-            while(curr.next.item != null) {
+            while (curr.next.item != null) {
                 System.out.print(curr.next.item + " ");
                 curr = curr.next;
             }
@@ -97,7 +97,7 @@ public class LinkedListDeque<T>{
         return curr.item;
     }
 
-    public T helper(TNode node, int index){
+    private T helper(TNode node, int index) {
         if (index == 0) {
             return node.item;
         }
@@ -110,4 +110,5 @@ public class LinkedListDeque<T>{
         }
         return helper(sentinel.next, index);
     }
+
 }
